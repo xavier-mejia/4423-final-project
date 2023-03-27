@@ -27,19 +27,12 @@ public class PlayerController : MonoBehaviour
         if (movementInput != Vector2.zero)
         {
             MovePlayer(movementInput);
-            
-            // Checking which animation to use
-            if (movementInput.x != 0) animator.SetBool("isMovingHorz", true);
-            else if (movementInput.x != 0 && movementInput.y > 0) animator.SetBool("isMovingHorz", true);
-            else if (movementInput.y > 0) animator.SetBool("isMovingForward", true);
-            else if (movementInput.y < 0) animator.SetBool("isMovingBack", true);
         }
         else
         {
             // Else if no movement detected, set these animations to false (idle animation will play automatically) 
-            animator.SetBool("isMovingHorz", false);
-            animator.SetBool("isMovingForward", false);
-            animator.SetBool("isMovingBack", false);
+            animator.SetFloat("Horizontal", 0f);
+            animator.SetFloat("Vertical", 0f);
         }
 
         if (movementInput.x < 0) spriteRenderer.flipX = true;
@@ -64,6 +57,8 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Colliding!");
             }
+            animator.SetFloat("Horizontal", direction.x);
+            animator.SetFloat("Vertical", direction.y);
     }
     
     private void OnMove(InputValue movementValue)
