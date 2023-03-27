@@ -27,14 +27,14 @@ public class PlayerController : MonoBehaviour
         if (movementInput != Vector2.zero) 
         {
             bool moveOccured = TryMove(movementInput);
-
             if (!moveOccured)
             {
                 moveOccured = TryMove(new Vector2(movementInput.x, 0));
                 moveOccured = TryMove(new Vector2(0, movementInput.y));
             }
-            
+
             if (movementInput.x != 0) animator.SetBool("isMovingHorz", moveOccured);
+            else if (movementInput.x != 0 && movementInput.y > 0) animator.SetBool("isMovingHorz", moveOccured);
             else if (movementInput.y > 0) animator.SetBool("isMovingForward", moveOccured);
             else if (movementInput.y < 0) animator.SetBool("isMovingBack", moveOccured);
         }
