@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 1f;
-    public float collisionOffset = 0.05f;
+    public float collisionOffset = 0.02f;
     public ContactFilter2D movementFilter;
     private Vector2 movementInput;
     private SpriteRenderer spriteRenderer;
@@ -31,12 +31,9 @@ public class PlayerController : MonoBehaviour
             if (!moveOccured)
             {
                 moveOccured = TryMove(new Vector2(movementInput.x, 0));
-
-                if (!moveOccured)
-                {
-                    moveOccured = TryMove(new Vector2(0, movementInput.y));
-                }
+                moveOccured = TryMove(new Vector2(0, movementInput.y));
             }
+            
             if (movementInput.x != 0) animator.SetBool("isMovingHorz", moveOccured);
             else if (movementInput.y > 0) animator.SetBool("isMovingForward", moveOccured);
             else if (movementInput.y < 0) animator.SetBool("isMovingBack", moveOccured);
@@ -55,20 +52,20 @@ public class PlayerController : MonoBehaviour
     private bool TryMove(Vector2 direction)
     {
         int count = rb.Cast(
-            // Checking for potential collisions
-            direction,  // X,Y values between -1-1 that represent the direction from body to look for collisions
-            movementFilter, // Settings that determine where a collision can occur on (ex: layers to collide with)
-            castCollisions, // List of collisions to store the found collisions into after the Cast is finished
-            moveSpeed * Time.fixedDeltaTime + collisionOffset // Amount to cast equal to movement + offset
-        );
+                // Checking for potential collisions
+                direction, // X,Y values between -1-1 that represent the direction from body to look for collisions
+                movementFilter, // Settings that determine where a collision can occur on (ex: layers to collide with)
+                castCollisions, // List of collisions to store the found collisions into after the Cast is finished
+                moveSpeed * Time.fixedDeltaTime + collisionOffset // Amount to cast equal to movement + offset
+            );
 
-        if (count == 0)
-        {
-            rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
-            return true;
-        }
-        else
-            return false;
+            if (count == 0)
+            {
+                rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
+                return true;
+            }
+            else
+                return false;
     }
     
     private void OnMove(InputValue movementValue)
