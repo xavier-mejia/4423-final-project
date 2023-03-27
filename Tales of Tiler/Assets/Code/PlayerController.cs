@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer(Vector2 direction)
     {
-        int count = rb.Cast(
+        int collisionCount = rb.Cast(
                 // Checking for potential collisions
                 direction, // X,Y values between -1-1 that represent the direction from body to look for collisions
                 movementFilter, // Settings that determine where a collision can occur on (ex: layers to collide with)
@@ -49,14 +49,15 @@ public class PlayerController : MonoBehaviour
                 moveSpeed * Time.fixedDeltaTime + collisionOffset // Amount to cast equal to movement + offset
             );
 
-            if (count == 0)
+            if (collisionCount == 0)
             {
                 rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
             }
             else
             {
-                Debug.Log("Colliding!");
+                Debug.Log("Number of objects player is colliding with: " + collisionCount);
             }
+            
             animator.SetFloat("Horizontal", direction.x);
             animator.SetFloat("Vertical", direction.y);
     }
@@ -64,5 +65,11 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputValue movementValue)
     {
         movementInput = movementValue.Get<Vector2>();
+    }
+
+    private void OnFire()
+    {
+        Debug.Log("Attacking! ('Fire Event Triggered')");
+        animator.SetTrigger("swordAttack");
     }
 }
