@@ -24,22 +24,19 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (movementInput != Vector2.zero) 
+        if (movementInput != Vector2.zero)
         {
-            bool moveOccured = TryMove(movementInput);
-            if (!moveOccured)
-            {
-                moveOccured = TryMove(new Vector2(movementInput.x, 0));
-                moveOccured = TryMove(new Vector2(0, movementInput.y));
-            }
-
-            if (movementInput.x != 0) animator.SetBool("isMovingHorz", moveOccured);
-            else if (movementInput.x != 0 && movementInput.y > 0) animator.SetBool("isMovingHorz", moveOccured);
-            else if (movementInput.y > 0) animator.SetBool("isMovingForward", moveOccured);
-            else if (movementInput.y < 0) animator.SetBool("isMovingBack", moveOccured);
+            MovePlayer(movementInput);
+            
+            // Checking which animation to use
+            if (movementInput.x != 0) animator.SetBool("isMovingHorz", true);
+            else if (movementInput.x != 0 && movementInput.y > 0) animator.SetBool("isMovingHorz", true);
+            else if (movementInput.y > 0) animator.SetBool("isMovingForward", true);
+            else if (movementInput.y < 0) animator.SetBool("isMovingBack", true);
         }
         else
         {
+            // Else if no movement detected, set these animations to false (idle animation will play automatically) 
             animator.SetBool("isMovingHorz", false);
             animator.SetBool("isMovingForward", false);
             animator.SetBool("isMovingBack", false);
@@ -49,7 +46,7 @@ public class PlayerController : MonoBehaviour
         else if (movementInput.x > 0) spriteRenderer.flipX = false;
     }
 
-    private bool TryMove(Vector2 direction)
+    private void MovePlayer(Vector2 direction)
     {
         int count = rb.Cast(
                 // Checking for potential collisions
@@ -62,10 +59,11 @@ public class PlayerController : MonoBehaviour
             if (count == 0)
             {
                 rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
-                return true;
             }
             else
-                return false;
+            {
+                Debug.Log("Colliding!");
+            }
     }
     
     private void OnMove(InputValue movementValue)
