@@ -13,18 +13,33 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private readonly List<RaycastHit2D> _castCollisions = new List<RaycastHit2D>();
-    
-    private Animator _animator;
     private bool _canMove = true;
-    private static readonly int Horizontal = Animator.StringToHash("Horizontal");
-    private static readonly int Vertical = Animator.StringToHash("Vertical");
+    private Animator _animator;
+
+
     private static readonly int Attack = Animator.StringToHash("swordAttack");
-    
+    private Vector2 _lastMovementDirection;
+    private static readonly int MoveHorz = Animator.StringToHash("MoveHorz");
+    private static readonly int MoveVert = Animator.StringToHash("MoveVert");
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Update()
+    {
+        float movementMagnitude = _movementInput.magnitude;
+
+        if (movementMagnitude > 0)
+        {
+            _animator.SetFloat(MoveHorz, _movementInput.x);
+            _animator.SetFloat(MoveVert, _movementInput.y);
+        }
+        _lastMovementDirection = _movementInput.normalized;
     }
 
     private void FixedUpdate()
@@ -37,18 +52,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                // Else if no movement detected, set these animations to false (idle animation will play automatically) 
-                _animator.SetFloat(Horizontal, 0f);
-                _animator.SetFloat(Vertical, 0f);
-            }
-
-            if (_movementInput.x < 0)
-            {
-                _spriteRenderer.flipX = true;
-            }
-            else if (_movementInput.x > 0)
-            {
-                _spriteRenderer.flipX = false;
+                // if no movement detected, tell animator player is not moving (idle animation will play automatically) 
+                _animator.SetBool("isMoving", false);
             }
         }
     }
@@ -65,15 +70,13 @@ public class PlayerController : MonoBehaviour
 
             if (collisionCount == 0)
             {
+                _animator.SetBool(IsMoving, true);
                 _rb.MovePosition(_rb.position + _movementInput * (moveSpeed * Time.fixedDeltaTime));
             }
             else
             {
                 Debug.Log("Number of objects player is colliding with: " + collisionCount);
             }
-            
-            _animator.SetFloat(Horizontal, direction.x);
-            _animator.SetFloat(Vertical, direction.y);
     }
     
     private void OnMove(InputValue movementValue)
@@ -94,5 +97,10 @@ public class PlayerController : MonoBehaviour
     private void UnlockMovement()
     {
         _canMove = true;
+    }
+    
+    private void OnEnable()
+    {
+        _lastMovementDirection = Vector2.down;
     }
 }
