@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    // Updates animator with the current movement input.
     private void Update()
     {
         float movementMagnitude = _movementInput.magnitude;
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 // if no movement detected, tell animator player is not moving (idle animation will play automatically) 
-                _animator.SetBool("isMoving", false);
+                _animator.SetBool(IsMoving, false);
             }
         }
     }
@@ -83,12 +84,7 @@ public class PlayerController : MonoBehaviour
     {
         _movementInput = movementValue.Get<Vector2>();
     }
-
-    private void OnFire()
-    {
-        _animator.SetTrigger(Attack);
-    }
-
+    
     private void LockMovement()
     {
         _canMove = false;

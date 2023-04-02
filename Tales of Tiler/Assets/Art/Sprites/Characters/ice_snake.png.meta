@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec2d96fb246fae5428e827dece53d1e1
+guid: dd343ced21931284093c8bf3ffdadf90
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,6 +121,90 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44b89c9545e73774db1e5f8536841c68
+      internalID: 1329134234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ice_snake_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f85514bac40036a4b8aba7a89692a1a8
+      internalID: 1855081921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ice_snake_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5203d5632b02a7b49983c7fe66881fc7
+      internalID: -261469776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ice_snake_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 48
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81bcd758231a21440903fd8ff23cde3d
+      internalID: 1739090117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ice_snake_4
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 48
         height: 48
@@ -131,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22c2e5d09ae6bee449ca2ed0ca592dd7
-      internalID: 351221419
+      spriteID: 98d9c768b8a0c9549b8eb8ca22d4f816
+      internalID: -104258959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ice_snake_1
+      name: ice_snake_5
       rect:
         serializedVersion: 2
         x: 48
@@ -152,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edb85e26d8baf7148a52e461a34704ee
-      internalID: -585186687
+      spriteID: 10b7db8dafdc48b4eb12965f91322532
+      internalID: -2009714392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ice_snake_2
+      name: ice_snake_6
       rect:
         serializedVersion: 2
         x: 96
@@ -173,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fd8f3e01471abf468608601745543b7
-      internalID: 1237104313
+      spriteID: 8e2f925c6fc02ca4097ff1f97a649eba
+      internalID: -1396631911
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ice_snake_3
+      name: ice_snake_7
       rect:
         serializedVersion: 2
         x: 144
@@ -194,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82609a642fdbc264a8c6d9b9fa842879
-      internalID: 1739725431
+      spriteID: 3bbaea6f5b4b7cb49a461b6000f8c3a3
+      internalID: -302345609
       vertices: []
       indices: 
       edges: []
@@ -211,10 +295,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ice_snake_0: 351221419
-      ice_snake_3: 1739725431
-      ice_snake_2: 1237104313
-      ice_snake_1: -585186687
+      ice_snake_5: -2009714392
+      ice_snake_4: -104258959
+      ice_snake_0: 1329134234
+      ice_snake_6: -1396631911
+      ice_snake_3: 1739090117
+      ice_snake_2: -261469776
+      ice_snake_1: 1855081921
+      ice_snake_7: -302345609
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
