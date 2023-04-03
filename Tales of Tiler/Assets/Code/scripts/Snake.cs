@@ -10,7 +10,7 @@ public class Snake : Enemy
     private Vector2 previousPosition;
     private Transform _playerTransform;
     private Animator _animator;
-    private Rigidbody2D _rb;
+
     private new void Start()
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -30,7 +30,7 @@ public class Snake : Enemy
             if (distanceFromPlayer <= detectionRange)
             {
                 previousPosition = transform.position;
-                MoveTowardsPlayer();
+                Move();
             }
         }
     }
@@ -45,12 +45,12 @@ public class Snake : Enemy
         previousPosition = dir;
     }
 
-    private void MoveTowardsPlayer()
+    protected override void Move()
     {
         transform.position = Vector2.MoveTowards(
             transform.position, 
             _playerTransform.position, 
             moveSpeed * Time.fixedDeltaTime
-            );
+        );
     }
 }

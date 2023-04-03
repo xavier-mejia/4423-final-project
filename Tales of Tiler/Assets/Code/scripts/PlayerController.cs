@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float collisionOffset = 0.02f;
     [SerializeField] private ContactFilter2D movementFilter;
     private Vector2 _movementInput;
+    private Vector2 _lastMovementDirection;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private readonly List<RaycastHit2D> _castCollisions = new List<RaycastHit2D>();
@@ -18,7 +19,6 @@ public class PlayerController : MonoBehaviour
 
 
     private static readonly int Attack = Animator.StringToHash("swordAttack");
-    private Vector2 _lastMovementDirection;
     private static readonly int MoveHorz = Animator.StringToHash("MoveHorz");
     private static readonly int MoveVert = Animator.StringToHash("MoveVert");
     private static readonly int IsMoving = Animator.StringToHash("isMoving");
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     {
         _canMove = false;
     }
-
+    
     private void UnlockMovement()
     {
         _canMove = true;
