@@ -12,7 +12,7 @@ public abstract class Enemy : MonoBehaviour
     
     protected int currentHealth;
     protected bool isAlive;
-
+    
     protected void Start()
     {
         currentHealth = maxHealth;

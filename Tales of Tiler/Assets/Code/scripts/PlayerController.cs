@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -106,10 +107,5 @@ public class PlayerController : MonoBehaviour
     private void UnlockMovement()
     {
         _canMove = true;
-    }
-    
-    private void OnEnable()
-    {
-        _lastMovementDirection = Vector2.down;
     }
 }

@@ -10,7 +10,9 @@ public class Snake : Enemy
     private Vector2 previousPosition;
     private Transform _playerTransform;
     private Animator _animator;
-
+    private string name = "Blah";
+    
+    
     private new void Start()
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;

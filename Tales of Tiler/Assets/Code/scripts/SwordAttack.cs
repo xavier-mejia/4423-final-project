@@ -7,7 +7,8 @@ public class SwordAttack : MonoBehaviour
 {
     private int _swordDamage = 10;
     private Collider2D _swordCollider;
-
+    // private LayerMask e;
+    
     public AudioClip hitSuccess;
     public AudioClip hitFail;
     private AudioSource _audioSource;
@@ -16,6 +17,7 @@ public class SwordAttack : MonoBehaviour
     {
         _swordCollider = GetComponent<Collider2D>();
         _audioSource = GetComponent<AudioSource>();
+        // e = GetComponent<LayerMask>();
     }
     
     private void OnTriggerEnter2D(Collider2D col)
