@@ -83,6 +83,19 @@ public class PlayerController : MonoBehaviour
     private void OnMove(InputValue movementValue)
     {
         _movementInput = movementValue.Get<Vector2>();
+        
+        // Restricting movement to 4 directions (up, down, left, right)
+        _movementInput.x = Mathf.Round(_movementInput.x);
+        _movementInput.y = Mathf.Round(_movementInput.y);
+        if (Mathf.Abs(_movementInput.x) > Mathf.Abs(_movementInput.y))
+        {
+            _movementInput.y = 0; 
+        }
+        
+        else
+        { 
+            _movementInput.x = 0;
+        }
     }
     
     private void LockMovement()
