@@ -6123,7 +6123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 548182442983339607, guid: 5e6219215f6e9c64db7a8d37e7dd3cb5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.48
+      value: 0.929
       objectReference: {fileID: 0}
     - target: {fileID: 548182442983339607, guid: 5e6219215f6e9c64db7a8d37e7dd3cb5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6233,6 +6233,10 @@ PrefabInstance:
     - target: {fileID: 4027667911561550248, guid: 9d1dc294deaf36445a6d67c30726fd80, type: 3}
       propertyPath: m_DefaultActionMap
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518972969522557256, guid: 9d1dc294deaf36445a6d67c30726fd80, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.051
       objectReference: {fileID: 0}
     - target: {fileID: 4915198097462393271, guid: 9d1dc294deaf36445a6d67c30726fd80, type: 3}
       propertyPath: m_IsActive
