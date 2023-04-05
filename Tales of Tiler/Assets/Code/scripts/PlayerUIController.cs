@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerUIBars : MonoBehaviour
+public class PlayerUIController : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 5;
     private int _currentHealth;

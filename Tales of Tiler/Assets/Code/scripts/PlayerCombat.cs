@@ -5,7 +5,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float attackRate = 2f;
 
     private PlayerController _playerController;
-    private PlayerUIBars _playerUIBars;
+    private PlayerUIController _playerUIController;
     private Animator _animator;
     private float _timeToNextAttack = 0f;
     private bool _isAttacking;
@@ -15,7 +15,7 @@ public class PlayerCombat : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _playerController = GetComponent<PlayerController>();
-        _playerUIBars = GetComponent<PlayerUIBars>();
+        _playerUIController = GetComponent<PlayerUIController>();
         _timeToNextAttack = Time.time;
     }
 
@@ -45,6 +45,6 @@ public class PlayerCombat : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
-        _playerUIBars.TakeDamage(damage);
+        _playerUIController.TakeDamage(damage);
     }
 }
