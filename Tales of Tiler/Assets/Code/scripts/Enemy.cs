@@ -1,48 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] protected int maxHealth = 5;
-    [SerializeField] protected float moveSpeed = 0.3f;
-    [SerializeField] protected float detectionRange = 10f;
+    [SerializeField] protected int _maxHealth = 5;
+    [SerializeField] protected float _moveSpeed = 0.3f;
+    [SerializeField] protected float _detectionRange = 10f;
+    [SerializeField] protected int _attackDamage = 1;
+    [SerializeField] protected float _attackRate = 0.5f;
+    private float _timeToNextAttack = 0f;
+    protected bool _canMove = true;
     
-    protected int currentHealth;
-    protected bool isAlive;
+    protected int _currentHealth;
+    protected bool _isAlive;
+    protected Animator _animator;
     
     protected void Start()
     {
-        currentHealth = maxHealth;
-        isAlive = true;
+        _currentHealth = _maxHealth;
+        _isAlive = true;
+        _animator = GetComponent<Animator>();
     }
     
-    protected void Update()
-    {
-        
-    }
-
     protected virtual void Move()
     {
         
     }
     
-    protected virtual void Attack()
+    public void TakeDamage(int damage)
     {
-        
-    }
-
-    public void TakeDamage(int attackDamage)
-    {
-        currentHealth -= attackDamage;
-        if (currentHealth <= 0) Die();
+        _currentHealth -= damage;
+        if (_currentHealth <= 0) Die();
     }
 
     protected void Die()
     {
-        isAlive = false;
+        _isAlive = false;
         Destroy(gameObject);
+    }
+    
+    protected void OnTriggerEnter2D(Collider2D col)
+    {
+        if (Time.time >= _timeToNextAttack)
+        {
+            if (col.CompareTag("Player"))
+            {
+                Debug.Log("Player hit!");
+                col.GetComponent<PlayerCombat>().TakeDamage(_attackDamage);
+                _timeToNextAttack =  Time.time + 1f / _attackRate;
+            }
+        }
+
+        if (col.gameObject.layer == LayerMask.NameToLayer("Landscape"))
+        {
+            Debug.Log("Snake cannot Move!");
+            // _canMove = false;
+        }
     }
 }

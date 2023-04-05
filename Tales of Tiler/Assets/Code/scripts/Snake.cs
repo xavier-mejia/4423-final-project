@@ -1,35 +1,28 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 public class Snake : Enemy
 {
     private Vector2 _previousPosition;
     private Transform _playerTransform;
-    private Animator _animator;
     private static readonly int MoveHorz = Animator.StringToHash("MoveHorz");
     private static readonly int MoveVert = Animator.StringToHash("MoveVert");
-
+    
     private new void Start()
     {
+        base.Start();
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        moveSpeed = 0.3f;
-        detectionRange = 10f;
-        isAlive = true;
-        _animator = GetComponent<Animator>();
+        _moveSpeed = 0.3f;
+        _detectionRange = 10f;
         _previousPosition = transform.position;
     }
 
-    private new void Update()
+    private void Update()
     {
-        if (isAlive)
+        if (_isAlive)
         {
             float distanceFromPlayer = Vector2.Distance(transform.position, _playerTransform.position);
 
-            if (distanceFromPlayer <= detectionRange)
+            if (distanceFromPlayer <= _detectionRange)
             {
                 _previousPosition = transform.position;
                 Move();
@@ -49,10 +42,30 @@ public class Snake : Enemy
 
     protected override void Move()
     {
-        transform.position = Vector2.MoveTowards(
-            transform.position, 
-            _playerTransform.position, 
-            moveSpeed * Time.fixedDeltaTime
-        );
+        if (_canMove)
+        {
+            transform.position = Vector2.MoveTowards(
+                transform.position, 
+                _playerTransform.position, 
+                _moveSpeed * Time.fixedDeltaTime
+            );
+        }
+    }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision detected with: " + collision.collider.gameObject.name);
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Landscape"))
+        {
+            Debug.Log("Snake cannot Move!");
+            _canMove = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Landscape")) {
+            _canMove = true;
+        }
     }
 }

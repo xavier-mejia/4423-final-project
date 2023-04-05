@@ -10,7 +10,6 @@ public class SwordAttack : MonoBehaviour
     public AudioClip hitSuccess;
     public AudioClip hitFail;
     private AudioSource _audioSource;
-    
     void Start()
     {
         _swordCollider = GetComponent<Collider2D>();
