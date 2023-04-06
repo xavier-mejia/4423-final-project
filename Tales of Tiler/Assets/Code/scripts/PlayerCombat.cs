@@ -41,7 +41,10 @@ public class PlayerCombat : MonoBehaviour
     
     public void OnFire()
     {
-        _isAttacking = true;
+        if (!_playerController.isPaused)
+        {
+            _isAttacking = true; 
+        }
     }
     
     public void TakeDamage(int damage)

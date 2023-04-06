@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private bool _canMove = true;
+    public bool isPaused = false;
     private Animator _animator;
 
 
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         float movementMagnitude = _movementInput.magnitude;
 
-        if (movementMagnitude > 0)
+        if (movementMagnitude > 0 && (isPaused == false))
         {
             _animator.SetFloat(MoveHorz, _movementInput.x);
             _animator.SetFloat(MoveVert, _movementInput.y);
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_canMove)
+        if (_canMove && !isPaused)
         {
             if (_movementInput != Vector2.zero)
             {
@@ -96,11 +97,13 @@ public class PlayerController : MonoBehaviour
         {
             Time.timeScale = 0;
             AudioListener.pause = true;
+            isPaused = true;
         }
         else
         {
             Time.timeScale = 1;
             AudioListener.pause = false;
+            isPaused = false;
         }
     }
     
