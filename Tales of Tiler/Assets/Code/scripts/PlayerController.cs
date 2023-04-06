@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private float collisionOffset;
+    [SerializeField] private float collisionOffset = .02f;
     private ContactFilter2D _movementFilter;
     private List<RaycastHit2D> _castCollisions = new List<RaycastHit2D>();
     private Vector2 _movementInput;
@@ -87,6 +87,20 @@ public class PlayerController : MonoBehaviour
         else
         { 
             _movementInput.x = 0;
+        }
+    }
+
+    private void OnPause()
+    {
+        if (Time.timeScale != 0)
+        {
+            Time.timeScale = 0;
+            AudioListener.pause = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            AudioListener.pause = false;
         }
     }
     
