@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 7905954890449830337}
   - component: {fileID: 9110527559236236027}
   - component: {fileID: 2210862763672750586}
+  - component: {fileID: 4640401548688229836}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -378,21 +379,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  collisionOffset: 0.02
-  movementFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
 --- !u!114 &2210862763672750586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,11 +391,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c97ec7c93e4e44c87b717f1cf6f2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upHitbox: {fileID: 0}
-  downHitbox: {fileID: 0}
-  leftHitbox: {fileID: 0}
-  rightHitbox: {fileID: 0}
   attackRate: 2
+--- !u!114 &4640401548688229836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055368575072864687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7b04f80bcf048428595be48e9ba9e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  healthBar: {fileID: 0}
+  maxMana: 5
+  manaBar: {fileID: 0}
 --- !u!1 &9185064391460078639
 GameObject:
   m_ObjectHideFlags: 0

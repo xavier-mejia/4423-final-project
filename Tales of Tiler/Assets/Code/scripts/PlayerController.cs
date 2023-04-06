@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,13 +6,12 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private float collisionOffset = 0.02f;
-    [SerializeField] private ContactFilter2D movementFilter;
+    [SerializeField] private float collisionOffset;
+    private ContactFilter2D _movementFilter;
+    private List<RaycastHit2D> _castCollisions = new List<RaycastHit2D>();
     private Vector2 _movementInput;
-    private Vector2 _lastMovementDirection;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
-    private readonly List<RaycastHit2D> _castCollisions = new List<RaycastHit2D>();
     private bool _canMove = true;
     private Animator _animator;
 
@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,7 +38,6 @@ public class PlayerController : MonoBehaviour
             _animator.SetFloat(MoveHorz, _movementInput.x);
             _animator.SetFloat(MoveVert, _movementInput.y);
         }
-        _lastMovementDirection = _movementInput.normalized;
     }
 
     private void FixedUpdate()
@@ -61,22 +59,17 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer(Vector2 direction)
     {
         int collisionCount = _rb.Cast(
-                // Checking for potential collisions
-                direction, // X,Y values between -1-1 that represent the direction from body to look for collisions
-                movementFilter, // Settings that determine where a collision can occur on (ex: layers to collide with)
-                _castCollisions, // List of collisions to store the found collisions into after the Cast is finished
-                moveSpeed * Time.fixedDeltaTime + collisionOffset // Amount to cast equal to movement + offset
+            direction,
+            _movementFilter,
+            _castCollisions,
+            moveSpeed * Time.fixedDeltaTime + collisionOffset
             );
 
-            if (collisionCount == 0)
-            {
-                _animator.SetBool(IsMoving, true);
-                _rb.MovePosition(_rb.position + _movementInput * (moveSpeed * Time.fixedDeltaTime));
-            }
-            else
-            {
-                Debug.Log("Number of objects player is colliding with: " + collisionCount);
-            }
+        if (collisionCount == 0)
+        {
+            _animator.SetBool(IsMoving, true); 
+            _rb.MovePosition((Vector2)transform.position + _movementInput * (moveSpeed * Time.fixedDeltaTime));
+        }
     }
     
     private void OnMove(InputValue movementValue)

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
@@ -37,23 +38,19 @@ public abstract class Enemy : MonoBehaviour
         _isAlive = false;
         Destroy(gameObject);
     }
-    
-    protected void OnTriggerEnter2D(Collider2D col)
+
+
+    protected void OnCollisionEnter2D(Collision2D col)
     {
         if (Time.time >= _timeToNextAttack)
         {
-            if (col.CompareTag("Player"))
+            if (col.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("Player hit!");
-                col.GetComponent<PlayerCombat>().TakeDamage(_attackDamage);
+                Debug.Log("Player Layer hit!");
+                col.gameObject.GetComponent<PlayerCombat>().TakeDamage(_attackDamage);
                 _timeToNextAttack =  Time.time + 1f / _attackRate;
             }
-        }
 
-        if (col.gameObject.layer == LayerMask.NameToLayer("Landscape"))
-        {
-            Debug.Log("Snake cannot Move!");
-            // _canMove = false;
         }
     }
 }
