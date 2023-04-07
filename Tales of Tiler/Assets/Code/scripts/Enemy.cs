@@ -39,14 +39,12 @@ public abstract class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-
     protected void OnCollisionEnter2D(Collision2D col)
     {
         if (Time.time >= _timeToNextAttack)
         {
             if (col.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                Debug.Log("Player Layer hit!");
                 col.gameObject.GetComponent<PlayerCombat>().TakeDamage(_attackDamage);
                 _timeToNextAttack =  Time.time + 1f / _attackRate;
             }

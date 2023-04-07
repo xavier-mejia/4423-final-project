@@ -51,4 +51,9 @@ public class PlayerCombat : MonoBehaviour
     {
         _playerUIController.TakeDamage(damage);
     }
+
+    public void Heal(int healAmount)
+    {
+        _playerUIController.Heal(healAmount);
+    }
 }

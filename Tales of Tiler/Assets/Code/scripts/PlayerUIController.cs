@@ -33,7 +33,12 @@ public class PlayerUIController : MonoBehaviour
 
         if (_currentHealth <= 0) Die();
     }
-    
+
+    public void Heal(int healAmount)
+    {
+        _currentHealth += healAmount;
+        healthBar.SetValue(_currentHealth);
+    }
     private void Die()
     {
         Debug.Log("Player is dead!");

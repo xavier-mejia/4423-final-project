@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         float movementMagnitude = _movementInput.magnitude;
 
-        if (movementMagnitude > 0 && (isPaused == false))
+        if (movementMagnitude > 0 && !isPaused)
         {
             _animator.SetFloat(MoveHorz, _movementInput.x);
             _animator.SetFloat(MoveVert, _movementInput.y);
