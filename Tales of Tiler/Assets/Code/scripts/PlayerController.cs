@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnPause()
+    public void OnPause()
     {
         if (Time.timeScale != 0)
         {
