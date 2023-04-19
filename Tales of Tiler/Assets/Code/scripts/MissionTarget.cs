@@ -8,13 +8,10 @@ public class MissionTarget : MonoBehaviour
 {
     private Collider2D _collider;
     private AudioSource _audioSource;
-    public AudioClip audioClip;
     [SerializeField] public GameObject music;
     void Start()
     {
         _collider = GetComponent<Collider2D>();
-        audioClip = GetComponent<AudioClip>();
-        // music = GetComponent<GameObject>();
         _audioSource = GetComponent<AudioSource>();
     }
 
