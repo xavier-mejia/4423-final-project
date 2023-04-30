@@ -11,6 +11,8 @@ public class PlayerUIController : MonoBehaviour
     private int _currentMana;
     public UIBar manaBar;
 
+    [SerializeField] private PauseMenu pauseMenu;
+    
     // Animations should be moved to a different player script. Works for now.
     private Animator _animator;
     private PlayerController _player;
@@ -57,6 +59,21 @@ public class PlayerUIController : MonoBehaviour
         manaBar.SetValue(mana);
     }
 
+    public void PauseGame()
+    {
+        pauseMenu.Pause();
+    }
+
+    public void ResumeGame()
+    {
+        pauseMenu.Resume();
+    }
+
+    public void LoadMenu()
+    {
+        Debug.Log("Loading Menu");    
+    }
+    
     public void QuitToMainMenu()
     {
         SceneManager.LoadScene(0);

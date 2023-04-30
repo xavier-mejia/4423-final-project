@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool _canMove = true;
     public bool isPaused = false;
     private Animator _animator;
-
+    private PlayerUIController _playerUIController;
 
     private static readonly int Attack = Animator.StringToHash("swordAttack");
     private static readonly int MoveHorz = Animator.StringToHash("MoveHorz");
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _playerUIController = GetComponent<PlayerUIController>();
     }
 
     // Updates animator with the current movement input.
@@ -93,17 +94,13 @@ public class PlayerController : MonoBehaviour
 
     public void OnPause()
     {
-        if (Time.timeScale != 0)
+        if (!isPaused)
         {
-            Time.timeScale = 0;
-            AudioListener.pause = true;
-            isPaused = true;
+            _playerUIController.PauseGame();
         }
         else
         {
-            Time.timeScale = 1;
-            AudioListener.pause = false;
-            isPaused = false;
+            _playerUIController.ResumeGame();
         }
     }
     
