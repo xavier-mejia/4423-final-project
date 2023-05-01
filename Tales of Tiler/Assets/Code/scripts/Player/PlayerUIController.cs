@@ -1,13 +1,14 @@
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerUIController : MonoBehaviour
+public class PlayerUIController : MonoBehaviour, IDataPersistence
 {
-    [SerializeField] private int maxHealth = 5;
+    private int _maxHealth;
     private int _currentHealth;
     public UIBar healthBar;
 
-    [SerializeField] private int maxMana = 5;
+    private int _maxMana;
     private int _currentMana;
     public UIBar manaBar;
 
@@ -18,11 +19,11 @@ public class PlayerUIController : MonoBehaviour
     private PlayerController _player;
     private void Start()
     {
-        _currentHealth = maxHealth;
-        healthBar.SetValue(maxHealth);
+        _currentHealth = _maxHealth;
+        healthBar.SetValue(_maxHealth);
 
-        _currentMana = maxMana;
-        manaBar.SetValue(maxMana);
+        _currentMana = _maxMana;
+        manaBar.SetValue(_maxMana);
 
         _animator = GetComponent<Animator>();
         _player = GetComponent<PlayerController>();
@@ -77,5 +78,24 @@ public class PlayerUIController : MonoBehaviour
     public void QuitToMainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void LoadData(GameData data)
+    {
+        _maxHealth = data.maxHealth;
+        _maxMana = data.maxMana;
+        _currentHealth = data.currentHealth;
+        _currentMana = data.currentMana;
+        
+        healthBar.SetValue(_currentHealth);
+        manaBar.SetValue(_currentMana);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.maxHealth = _maxHealth;
+        data.maxMana = _maxMana;
+        data.currentHealth = _currentHealth;
+        data.currentMana = _currentMana;
     }
 }

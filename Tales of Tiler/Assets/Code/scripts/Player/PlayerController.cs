@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float collisionOffset = .02f;
@@ -112,5 +112,15 @@ public class PlayerController : MonoBehaviour
     private void UnlockMovement()
     {
         _canMove = true;
+    }
+
+    public void LoadData(GameData data)
+    {
+        transform.position = data.playerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = transform.position;
     }
 }
