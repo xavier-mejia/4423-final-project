@@ -26,7 +26,7 @@ public class DataPersistenceManager : MonoBehaviour
     {
         _dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         _dataPersistenceObjects = FindAllDataPersistences();
-        Debug.Log("Persistence objects count: " + _dataPersistenceObjects.Count);
+
         LoadGame();
     }
     public void NewGame()

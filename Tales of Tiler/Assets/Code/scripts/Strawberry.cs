@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using UnityEngine;
 
 public class Strawberry : MonoBehaviour, IDataPersistence

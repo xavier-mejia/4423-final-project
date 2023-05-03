@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _playerUIController = GetComponent<PlayerUIController>();
+        
+        _playerUIController.ResumeGame();
     }
 
     // Updates animator with the current movement input.
