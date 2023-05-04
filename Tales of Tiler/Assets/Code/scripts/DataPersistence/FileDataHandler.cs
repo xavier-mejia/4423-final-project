@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 public class FileDataHandler
@@ -13,9 +14,9 @@ public class FileDataHandler
         _dataFileName = dataFileName;
     }
 
-    public GameData Load()
+    public GameData Load(string profileId)
     {
-        string fullPath = Path.Combine(_dataDirPath, _dataFileName);
+        string fullPath = Path.Combine(_dataDirPath, profileId, _dataFileName);
         GameData loadedData = null;
 
         if (File.Exists(fullPath))
@@ -42,9 +43,38 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(GameData data)
+    public Dictionary<string, GameData> LoadAllProfiles()
     {
-        string fullPath = Path.Combine(_dataDirPath, _dataFileName);
+        Dictionary<string, GameData> profileDictionary = new Dictionary<string, GameData>();
+
+        IEnumerable<DirectoryInfo> directoryInfos = new DirectoryInfo(_dataDirPath).EnumerateDirectories();
+        foreach (DirectoryInfo directoryInfo in directoryInfos)
+        {
+            string profileId = directoryInfo.Name;
+
+            string fullPath = Path.Combine(_dataDirPath, profileId, _dataFileName);
+            if (!File.Exists(fullPath))
+            {
+                Debug.Log("Skipping directory when loading all profiles because it does not contain data: " + profileId);
+            }
+
+            GameData profileData = Load(profileId);
+            if (profileData != null)
+            {
+                profileDictionary.Add(profileId, profileData);
+            }
+            else
+            {
+                Debug.Log("Attempted to load profile but something went wrong! ProfileId: " + profileId);
+            }
+        }
+        
+        return profileDictionary;
+    }
+    public void Save(GameData data, string profileId)
+    {
+        string fullPath = Path.Combine(_dataDirPath, profileId, _dataFileName);
+        Debug.Log("Full path: " + fullPath);
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));

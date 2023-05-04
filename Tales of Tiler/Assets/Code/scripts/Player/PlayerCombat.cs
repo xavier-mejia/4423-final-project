@@ -11,7 +11,8 @@ public class PlayerCombat : MonoBehaviour
     private float _timeToNextAttack = 0f;
     private bool _isAttacking;
     private static readonly int SwordAttack = Animator.StringToHash("swordAttack");
-
+    public GameObject fireball;
+    public Transform firepointUp, firepointDown, firepointRight, firepointLeft;
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -46,7 +47,17 @@ public class PlayerCombat : MonoBehaviour
             _isAttacking = true; 
         }
     }
-    
+
+    public void OnMagic()
+    {
+        _isAttacking = true;
+        ShootFireball();
+    }
+
+    private void ShootFireball()
+    {
+        _isAttacking = false;
+    }
     public void TakeDamage(int damage)
     {
         _playerUIController.TakeDamage(damage);

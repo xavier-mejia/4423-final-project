@@ -3,14 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
+    [Header("Menu Navigation")]
+    [SerializeField]
+    private SaveSlotsMenu _saveSlotsMenu;
+    
     [SerializeField] private GameObject _optionsMenu;
     
-    public void StartGame()
+    public void NewGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        _saveSlotsMenu.ActivateMenu(false);
+        DeactivateMenu();
     }
 
+    public void LoadGame()
+    {
+        _saveSlotsMenu.ActivateMenu(true);
+        DeactivateMenu();
+
+    }
+    
     public void OpenOptions()
     {
         _optionsMenu.SetActive(true);
@@ -24,5 +35,15 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ActivateMenu()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void DeactivateMenu()
+    {
+        gameObject.SetActive(false);
     }
 }

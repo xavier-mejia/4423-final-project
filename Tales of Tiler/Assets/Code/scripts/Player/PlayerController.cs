@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     private static readonly int MoveHorz = Animator.StringToHash("MoveHorz");
     private static readonly int MoveVert = Animator.StringToHash("MoveVert");
     private static readonly int IsMoving = Animator.StringToHash("isMoving");
-
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();

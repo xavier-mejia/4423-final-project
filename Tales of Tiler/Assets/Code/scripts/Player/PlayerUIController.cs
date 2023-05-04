@@ -18,12 +18,6 @@ public class PlayerUIController : MonoBehaviour, IDataPersistence
     private PlayerController _player;
     private void Start()
     {
-        _currentHealth = _maxHealth;
-        healthBar.SetValue(_maxHealth);
-
-        _currentMana = _maxMana;
-        manaBar.SetValue(_maxMana);
-
         _animator = GetComponent<Animator>();
         _player = GetComponent<PlayerController>();
     }
@@ -68,17 +62,7 @@ public class PlayerUIController : MonoBehaviour, IDataPersistence
     {
         pauseMenu.Resume();
     }
-
-    public void LoadMenu()
-    {
-        Debug.Log("Loading Menu");    
-    }
     
-    public void QuitToMainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-
     public void LoadData(GameData data)
     {
         _maxHealth = data.maxHealth;
